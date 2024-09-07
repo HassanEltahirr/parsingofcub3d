@@ -13,9 +13,16 @@ int parse_cub_file(const char *file_path)
 	t_game_data game_data = {0};
 	char **file_content;
 
+	int i = 0;
 	file_content = read_file(file_path);
 	if(file_content == NULL)
 		return -1;
+	while (file_content[i])
+	{
+		printf("%s\n", file_content[i]);
+		i++;
+	}
+	
 	if(parse_textures_and_colors(&game_data, file_content) == -1)
 	{
 		free_file_content(file_content);

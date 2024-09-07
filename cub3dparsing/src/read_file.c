@@ -27,7 +27,7 @@ char **read_file(const char *file_path)
 {
 	int fd;
 	char **file_content;
-	// char *line = NULL;
+	char *line = NULL;
 	int i;
 
 	fd = open(file_path, O_RDONLY);
@@ -37,11 +37,19 @@ char **read_file(const char *file_path)
 	if(file_content == NULL)
 		return NULL;
 	i = 0;
-	while((file_content[i] = get_next_line(fd)))
+	line  = get_next_line(fd);
+	while((line))
 	{
-		if (file_content[i] == NULL)
-			printf("file_content[%d] = NULL\n", i);
-		i++;
+		if(line [0] != '\0' && line[0] != '\n')
+		{
+			file_content[i] = ft_strtrim(ft_strdup(line), WHITESPACES);
+			i++;
+		}
+		// else
+		// {
+		// 	i++;
+		// }
+		line = get_next_line(fd);
 	}
 	file_content[i] = NULL;
 	close(fd);

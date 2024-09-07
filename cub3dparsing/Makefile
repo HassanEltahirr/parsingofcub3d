@@ -1,6 +1,7 @@
 NAME = cub3d_parser
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I include -I get_next_line -fsanitize=address -g3
+# CFLAGS = -Wall -Wextra -Werror -I include -I get_next_line -g3
 
 SRC_DIR = src
 GNL_DIR = getnextline

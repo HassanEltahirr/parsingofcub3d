@@ -18,19 +18,18 @@ int parse_textures_and_colors(t_game_data *game,char **file_data)
 		else if(strncmp(file_data[i], "F", 1) == 0)
 		{
 			array = ft_split(file_data[i] + 2, ',');
-			game->floor_color[0] = atoi(array[0]);
-			game->floor_color[1] = atoi(array[1]);
-			game->floor_color[2] = atoi(array[2]);
+			game->floor_color[0] = ft_atoi(array[0]);
+			game->floor_color[1] = ft_atoi(array[1]);
+			game->floor_color[2] = ft_atoi(array[2]);
 		}
 		else if(strncmp(file_data[i], "C", 1) == 0)
 		{
 			array = ft_split(file_data[i] + 2, ',');
-			game->ceiling_color[0] = atoi(array[0]);
-			game->ceiling_color[1] = atoi(array[1]);
-			game->ceiling_color[2] = atoi(array[2]);
-		}
+			game->ceiling_color[0] = ft_atoi(array[0]);
+			game->ceiling_color[1] = ft_atoi(array[1]);
+			game->ceiling_color[2] = ft_atoi(array[2]);
+		}			
 		i++;
 	}
-	printf("Floor color: %d\n", game->floor_color[1]);
 	return 0;
 }

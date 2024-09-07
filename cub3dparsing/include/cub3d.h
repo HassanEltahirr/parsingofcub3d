@@ -1,5 +1,6 @@
 #ifndef CUB3D_H
 #define CUB3D_H
+#define WHITESPACES "\n\r\v\f 32"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
