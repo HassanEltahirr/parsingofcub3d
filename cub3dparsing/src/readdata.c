@@ -32,6 +32,5 @@ int parse_textures_and_colors(t_game_data *game,char **file_data)
 		i++;
 	}
 	printf("Floor color: %d\n", game->floor_color[1]);
-	// printf("Ceiling color: %d\n", game->ceiling_color[2]);
 	return 0;
 }

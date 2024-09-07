@@ -6,7 +6,7 @@ char **read_file(const char *file_path);
 
 void free_file_content(char **file_content);
 /*
-this function is responsible for parsing the cub file
+	this function is responsible for parsing the cub file
 */
 int parse_cub_file(const char *file_path)
 {

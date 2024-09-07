@@ -1,29 +1,6 @@
 #include "cub3d.h"
 #include <stdio.h>
 /*
-this function is used to duplicate a string
-*/
-char *ft_strdup(char *src)
-{
-	char *dest;
-	int i;
-
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	dest = (char *)malloc(sizeof(char) * (i + 1));
-	if (dest == NULL)
-		return (NULL);
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-/*
 this function is responsible for counting the number of lines in a file
 */
 int total_lines(const char *file_path)
