@@ -11,6 +11,7 @@ LIBFT = $(LIBFT_DIR)/libft.a  # Correct libft path
 SRCS = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/read_file.c \
 		$(SRC_DIR)/readdata.c \
+		$(SRC_DIR)/map_validation.c \
 		$(GNL_DIR)/get_next_line.c \
     	$(GNL_DIR)/get_next_line_utils.c
 

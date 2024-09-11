@@ -1,6 +1,6 @@
 #ifndef CUB3D_H
 #define CUB3D_H
-#define WHITESPACES "\n\r\v\f 32"
+#define WHITESPACES "\n\r\v\f \t 32"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,11 +18,14 @@ typedef struct s_game_data
 	int floor_color[3];
 	int ceiling_color[3];
 	char **map;
+	int row;
+	int coloumn;
+	char directions;
 }t_game_data;
 char **read_file(const char *file_path);
 void free_file_content(char **file_content);
 int parse_cub_file(const char *file_path);
 int parse_textures_and_colors(t_game_data *game,char **file_data);
 char				**ft_split(char const *s, char c);
-
+int parse_our_map(t_game_data *game_data ,char **file_data, int i);
 #endif

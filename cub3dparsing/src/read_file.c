@@ -21,7 +21,7 @@ int total_lines(const char *file_path)
 	return total_lines;
 }
 /*
-this function is responsible for reading the file content and storing it in a 2D array as well as printing it 
+This function is responsible for reading the file content and storing it in a 2D array as well as printing it 
 */
 char **read_file(const char *file_path)
 {
@@ -45,10 +45,6 @@ char **read_file(const char *file_path)
 			file_content[i] = ft_strtrim(ft_strdup(line), WHITESPACES);
 			i++;
 		}
-		// else
-		// {
-		// 	i++;
-		// }
 		line = get_next_line(fd);
 	}
 	file_content[i] = NULL;
