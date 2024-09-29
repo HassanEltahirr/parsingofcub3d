@@ -20,7 +20,7 @@ int parse_cub_file(const char *file_path)
 		return -1;
 	char **trimmed_line = NULL;
 	trimmed_line = file_content;
-	file_content[i] = ft_strtrim(ft_strdup(*trimmed_line), WHITESPACES);
+	file_content[i] = ft_strdup(*trimmed_line);
 	if(parse_textures_and_colors(&game_data, file_content) == -1)
 	{
 		free_file_content(file_content);
@@ -28,7 +28,7 @@ int parse_cub_file(const char *file_path)
 	}
 	while(file_content[i][0] != '1')
 			i++;
-	parse_our_map(&game_data,file_content, i);
+	parse_our_map(&game_data,&file_content[i], i);
 	free_file_content(file_content);
 	return 0;
 }

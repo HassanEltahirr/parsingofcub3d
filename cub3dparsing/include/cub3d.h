@@ -28,4 +28,7 @@ int parse_cub_file(const char *file_path);
 int parse_textures_and_colors(t_game_data *game,char **file_data);
 char				**ft_split(char const *s, char c);
 int parse_our_map(t_game_data *game_data ,char **file_data, int i);
+int get_map_height(char **file_data);
+int finalize_map(t_game_data *game_data,char **file_data);
+
 #endif
