@@ -30,12 +30,6 @@ int ismapenclosedbywalls(char **file_data)
         printf("Error\nMap is not enclosed by walls (top or bottom row)\n");
         return -1;
     }
-
-october 14 linear algebra 19:35-21:00
-Wednesday, October 9, 2024 human behaviour 5 - 6:15
-October 11th 11:00am data science
-October 18th 11:am object orientated programming	quiz 2
-
     i = 1;
     while (i < height - 1) 
     {
