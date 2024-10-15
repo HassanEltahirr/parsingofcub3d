@@ -17,7 +17,7 @@ int is_row_fully_walls(char *row)
 int is_valid_char(char c)
 {
     // Valid characters adjacent to '0' are '0', '1', and player positions
-    return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+    return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
 int ismapenclosedbywalls(char **file_data)
 {
@@ -35,7 +35,7 @@ int ismapenclosedbywalls(char **file_data)
     {
         int width = ft_strlen(file_data[i]);
         j = 0;
-        while (j < width)
+        while (j < width && is_valid_char(file_data[i][j]))
         {
             if (file_data[i][j] == '0' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W')
             {
@@ -90,27 +90,31 @@ int parse_our_map(t_game_data *game_data ,char **file_data, int i)
     int j;
     int player_found = 0;
     i = 0;
-
     while (file_data[i])
     {
         j = 0;
         while (file_data[i][j])
         {
-            if (file_data[i][j] == 'S' || file_data[i][j] == 'N' || file_data[i][j] == 'W' || file_data[i][j] == 'E')
+            if (file_data[i][j] == 'S' || file_data[i][j] == 'N' || file_data[i][j] == 'W' || (file_data[i][j] == 'E' && player_found == 0))
             {
                 game_data->row = i;
                 game_data->coloumn = j;
                 game_data->directions = file_data[i][j];
                 file_data[i][j] = '0';  // Replace player position with '0'
-                player_found = 1;
+                player_found++;
+            }
+            else if(!(file_data[i][j] == '0' || file_data[i][j] == '1' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W' || file_data[i][j] == ' '))
+            {
+                printf("Error: Invalid character in map.\n");
+                return -1;
             }
             j++;
         }
         i++;
     }
-    if (!player_found)
+    if (player_found != 1)
     {
-        printf("Error: No player found in the map.\n");
+        printf("Error with player found in the map.\n");
         return -1;
     }
     if (ismapenclosedbywalls(file_data) == -1)
