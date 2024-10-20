@@ -21,6 +21,8 @@ typedef struct s_game_data
 	int row;
 	int coloumn;
 	char directions;
+	int	is_texture_set;
+	int	is_color_set;
 }t_game_data;
 char **read_file(const char *file_path);
 void free_file_content(char **file_content);

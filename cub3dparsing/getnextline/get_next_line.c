@@ -6,7 +6,7 @@
 /*   By: haeltahi <haeltahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:17:34 by haeltahi          #+#    #+#             */
-/*   Updated: 2023/08/12 20:02:57 by haeltahi         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:28:55 by haeltahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	chars_read = 1;
 	while (!ft_strchr(left_str, '\n') && chars_read != 0)
 	{
-		chars_read = read (fd, buf, BUFFER_SIZE);
+		chars_read = read(fd, buf, BUFFER_SIZE);
 		if (chars_read < 0)
 		{
 			free (left_str);

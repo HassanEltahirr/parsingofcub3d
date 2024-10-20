@@ -6,20 +6,28 @@
 /*   By: haeltahi <haeltahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 15:21:16 by haeltahi          #+#    #+#             */
-/*   Updated: 2023/07/19 09:09:26 by haeltahi         ###   ########.fr       */
+/*   Updated: 2024/10/20 23:25:23 by haeltahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 
+static int ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
 int	ft_atoi(const char *str)
 {
 	int		sign;
+	int		flag;
 	long	result;
 
 	sign = 1;
 	result = 0;
+	flag = 0;
 	while ((*str >= 9 && *str <= 13) || (*str == 32 && *str))
 		str++;
 	if (*str == '-')
@@ -28,6 +36,7 @@ int	ft_atoi(const char *str)
 		str++;
 	while (*str && (*str >= '0' && *str <= '9'))
 	{
+		flag = 1;
 		result = 10 * result + (*str - '0');
 		str++;
 		if ((result > LONG_MAX / 10) 
@@ -39,6 +48,8 @@ int	ft_atoi(const char *str)
 				return (0);
 		}
 	}
+	if (!flag || (*str && !ft_isspace(*str) && (*str < '0' || *str > '9')))
+		return (-100);
 	return (sign * result);
 }
 

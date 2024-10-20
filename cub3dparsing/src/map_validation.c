@@ -6,8 +6,9 @@ int is_row_fully_walls(char *row)
     int i = 0;
     while (row[i])
     {
-        if (row[i] != '1' && row[i] != ' ')
+        if (row[i] != '1' && row[i] != ' ' && row[i] != '\n')
         {
+            printf("%c",row[i]);
             return 1;  // Return 1 (error) if the row contains something other than '1' or ' '
         }
         i++;
@@ -95,6 +96,10 @@ int parse_our_map(t_game_data *game_data ,char **file_data, int i)
         j = 0;
         while (file_data[i][j])
         {
+            if(file_data[i][j] == ' ')
+            {
+                file_data[i][j] = '1';
+            }
             if (file_data[i][j] == 'S' || file_data[i][j] == 'N' || file_data[i][j] == 'W' || (file_data[i][j] == 'E' && player_found == 0))
             {
                 game_data->row = i;
@@ -103,7 +108,7 @@ int parse_our_map(t_game_data *game_data ,char **file_data, int i)
                 file_data[i][j] = '0';  // Replace player position with '0'
                 player_found++;
             }
-            else if(!(file_data[i][j] == '0' || file_data[i][j] == '1' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W' || file_data[i][j] == ' '))
+            else if(!(file_data[i][j] == '0' || file_data[i][j] == '1' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W' || file_data[i][j] == ' ' || file_data[i][j] == '\n'))
             {
                 printf("Error: Invalid character in map.\n");
                 return -1;

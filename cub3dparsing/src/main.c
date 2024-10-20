@@ -10,16 +10,23 @@ void free_file_content(char **file_content);
 */
 int parse_cub_file(const char *file_path)
 {
-	char **file_content;
-	t_game_data game_data;
+	char		**file_content;
+	t_game_data	game_data;
+	int 		i;
 
 	game_data = (t_game_data){0};
-	int i = 0;
+	game_data.floor_color[0] = -1;
+	game_data.floor_color[1] = -1;
+	game_data.floor_color[2] = -1;
+	game_data.ceiling_color[0] = -1;
+	game_data.ceiling_color[1] = -1;
+	game_data.ceiling_color[2] = -1;
 	file_content = read_file(file_path);
 	if(file_content == NULL)
 		return -1;
 	char **trimmed_line = NULL;
 	trimmed_line = file_content;
+	i = 0;
 	file_content[i] = ft_strdup(*trimmed_line);
 	if(parse_textures_and_colors(&game_data, file_content) == -1)
 	{
