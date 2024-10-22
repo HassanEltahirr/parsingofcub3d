@@ -23,7 +23,10 @@ int parse_cub_file(const char *file_path)
 	game_data.ceiling_color[2] = -1;
 	file_content = read_file(file_path);
 	if(file_content == NULL)
+	{
+		printf("Error the file wasn't found.\n");
 		return -1;
+	}
 	char **trimmed_line = NULL;
 	trimmed_line = file_content;
 	i = 0;
@@ -45,10 +48,15 @@ int main(int ac,char **av)
 	{
 		printf("Usage: ./cub3d_parser <path_to_cub_file>\n");
 		return 0;	
-	}	
+	}
+	
+	if(ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4) != 0)
+	{
+		printf("Error the name is incorrect \n");
+		return -1;
+	}
 	if(parse_cub_file(av[1]) == -1)
 	{
-		printf("Error\n");
 		return -1;
 	}
 }
