@@ -6,7 +6,7 @@
 /*   By: haeltahi <haeltahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 15:21:16 by haeltahi          #+#    #+#             */
-/*   Updated: 2024/10/20 23:25:23 by haeltahi         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:12:33 by haeltahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int	ft_atoi(const char *str)
 		flag = 1;
 		result = 10 * result + (*str - '0');
 		str++;
+		if (sign == 1 && result > INT_MAX)
+            return INT_MAX; 
+        if (sign == -1 && -result < INT_MIN)
+            return INT_MIN;
 		if ((result > LONG_MAX / 10) 
 			|| (result == LONG_MAX / 10 && (*str - '0') > LONG_MAX % 10))
 		{
@@ -48,7 +52,9 @@ int	ft_atoi(const char *str)
 				return (0);
 		}
 	}
-	if (!flag || (*str && !ft_isspace(*str) && (*str < '0' || *str > '9')))
+	while (*str == ' ')
+		str++;
+	if (!flag || (*str && !ft_isspace(*str)))
 		return (-100);
 	return (sign * result);
 }

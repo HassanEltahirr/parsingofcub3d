@@ -1,8 +1,6 @@
 #include "cub3d.h"
 #include <stdio.h>
-/*
-this function is responsible for counting the number of lines in a file
-*/
+
 int total_lines(const char *file_path)
 {
 	int	fd;
@@ -17,9 +15,6 @@ int total_lines(const char *file_path)
 	close(fd);
 	return (total_lines);
 }
-/*
-This function is responsible for reading the file content and storing it in a 2D array as well as printing it 
-*/
 char **read_file(const char *file_path)
 {
 	int fd;
@@ -37,20 +32,14 @@ char **read_file(const char *file_path)
 	line  = get_next_line(fd);
 	while(line)
 	{
-		if(line[0] != '\0' && line[0] != '\n')
-		{
 			file_content[i] = ft_strdup(line);
 			i++;
-		}
-		line = get_next_line(fd);
+			line = get_next_line(fd);
 	}
 	file_content[i] = NULL;
 	close(fd);
 	return (file_content);
 }
-/*
-this function is used to free the memory allocated for the file content
-*/
 void free_file_content(char **file_content)
 {
 	int i;

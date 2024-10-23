@@ -32,5 +32,6 @@ char				**ft_split(char const *s, char c);
 int parse_our_map(t_game_data *game_data ,char **file_data, int i);
 int get_map_height(char **file_data);
 int finalize_map(t_game_data *game_data,char **file_data);
-
+int validate_file_content(char **file_data);
+int find_map_start(char **file_data);
 #endif

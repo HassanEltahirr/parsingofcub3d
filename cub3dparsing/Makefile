@@ -12,6 +12,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/read_file.c \
 		$(SRC_DIR)/readdata.c \
 		$(SRC_DIR)/map_validation.c \
+		$(SRC_DIR)/validate_file_content.c \
 		$(GNL_DIR)/get_next_line.c \
     	$(GNL_DIR)/get_next_line_utils.c
 

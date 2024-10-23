@@ -6,7 +6,7 @@
 #    By: haeltahi <haeltahi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 21:19:28 by ncolomer          #+#    #+#              #
-#    Updated: 2023/07/19 16:46:56 by haeltahi         ###   ########.fr        #
+#    Updated: 2024/10/22 21:54:26 by haeltahi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = libft.a
 SRCS =ft_bzero.c  ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_isdigit.c ft_isprint.c  ft_memcpy.c \
 	ft_memmove.c ft_memset.c \
-	ft_strlcat.c ft_strlcpy.c ft_strlen.c  ft_tolower.c ft_toupper.c ft_memcmp.c  \
+	ft_strlcat.c ft_strlcpy.c ft_strlen.c  ft_tolower.c ft_toupper.c ft_memcmp.c ft_strcmp.c \
 	ft_strchr.c \
 ft_strrchr.c \
 ft_strncmp.c \

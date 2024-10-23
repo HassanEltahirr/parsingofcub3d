@@ -1,6 +1,5 @@
 #include "cub3d.h"
 #include <stdio.h>
-// #include "libft.h"
 int free_split(char **split)
 {
 	int i;
@@ -76,22 +75,6 @@ int set_texture(t_game_data *game, char *texture)
     free_split(split);
     return result;
 }
-// int ft_check_color(char *str)
-// {
-//     int i = 0;
-//     int check = 0;
-
-//     if (str)
-//     {
-//         while(str[i] == ' ')
-//             i++;
-//         if (str[i] == 'F' || str[i] == 'C')
-//             check++;
-//         while(str[i] == ' ')
-//             i++;
-        
-//     }
-// }
 char *remove_all_spaces(char *str)
 {
     char *new_str;
@@ -120,11 +103,11 @@ int validatenumberofargs(char **split_color)
     int i = 0;
     while (split_color[i])
     {
-        int j = 0;  // Reset j for each new string
+        int j = 0;
         while (split_color[i][j])
         {
             if (!ft_isdigit(split_color[i][j]))
-                printf("%c", split_color[i][j]);
+                // printf("%c", split_color[i][j]);
                 return 0;
             j++;
         }
@@ -164,26 +147,13 @@ int set_color(t_game_data *game, char *texture)
         return (0);
     }
     split_str = ft_split(texture, ' ');
-    // char *ui = remove_all_spaces(texture);
-    // validatenumberofargs(split_color);
-    // if ((!split_color || !split_color[0] || !split_color[1] || !split_color[2] || split_color[3])  && validatenumberofargs(split_color))
-    // {
-    //     printf("Error: Invalid color values\n");
-    //     free_split(split_str);
-    //     free_split(split_color);
-    //     return (0);
-    // }
-    // printf("split_color[0] : %s\n", split_color[0]);
     if (ft_strcmp(split_str[0], "F") == 0 && game->floor_color[0] == -1)
     {
-        // printf("ds");
         result = use_atoi(game, split_color, 'F');
         checker++;
-        // printf("%d\n", result);
     }
     else if (ft_strcmp(split_str[0], "C") == 0 )
     {
-        // printf("ds");
         result = use_atoi(game, split_color, 'C');
     }
     else
@@ -201,7 +171,6 @@ int parse_textures_and_colors(t_game_data *game, char **file_data)
 {
     int  i;
     char **split;
-    int checker = 0;
     i = 0;
     while (file_data[i] && file_data[i][0] != '1')
     {
@@ -230,28 +199,14 @@ int parse_textures_and_colors(t_game_data *game, char **file_data)
                 free_split(split);
                 return (-1);
             }
-            checker++;
-        }
-        else
-        {
-            printf("Error: Unknown identifier %s\n", split[0]);
-            free_split(split);
-            return (-1);
         }
         free_split(split);
         if (game->no_texture && game->so_texture && game->we_texture && game->ea_texture)
             game->is_texture_set = 1;
         if (game->floor_color[0] != -1 && game->floor_color[1] != -1 && game->floor_color[2] != -1
             && game->ceiling_color[0] != -1 && game->ceiling_color[1] != -1 && game->ceiling_color[2] != -1)
-            game->is_color_set = 1;
-        // printf("%d",checker);
-     
+            game->is_color_set = 1;     
         i++;
     }
-       if(checker != 2)
-        {
-            printf("Error: Missing color identifier\n");
-            return (-1);
-        }
     return 0;
 }
