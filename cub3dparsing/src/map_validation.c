@@ -15,21 +15,17 @@ int ismapenclosedbywalls(char **file_data)
     {
         int width = ft_strlen(file_data[i]);
         int widthlinebefore = ft_strlen(file_data[i - 1]);
-        int widthlineafter = ft_strlen(file_data[i + 1]);
+        // int widthlineafter = ft_strlen(file_data[i + 1]);
         j = 0;
         while (j < width && is_valid_char(file_data[i][j]))
         {
-            if(width > widthlinebefore || width > widthlineafter)
-            {
-                printf("Error\nMap is not enclosed by walls (top or bottom edge)\n");
-                return -1;
-            }
-            {
-                printf("Error\nMap is not enclosed by walls (top or bottom edge)\n");
-                return -1;
-            }
             if (file_data[i][j] == '0' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W')
             {
+                if(width > widthlinebefore  || width < widthlinebefore)
+            {
+                printf("Error\nMap is not enclosed by walls (top or bottom edge)\n");
+                return -1;
+            }
                 if (j == 0 || j == width - 1)
                 {
                     printf("Error\nMap is not enclosed by walls (left or right edge)\n");
