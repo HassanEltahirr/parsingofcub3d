@@ -6,19 +6,26 @@ int is_valid_char(char c)
 }
 int ismapenclosedbywalls(char **file_data)
 {
-    int i = 0, j;
+    int i = 0;
+    int j;
     int height = get_map_height(file_data);
 
     i = 0;
     while (i < height) 
     {
         int width = ft_strlen(file_data[i]);
+        int widthlinebefore = ft_strlen(file_data[i - 1]);
+        int widthlineafter = ft_strlen(file_data[i + 1]);
         j = 0;
         while (j < width && is_valid_char(file_data[i][j]))
         {
-            if(file_data[i][j] == '\n')
+            if(width > widthlinebefore || width > widthlineafter)
             {
-                printf("Error\nMap is not enclosed by walls (newline character)\n");
+                printf("Error\nMap is not enclosed by walls (top or bottom edge)\n");
+                return -1;
+            }
+            {
+                printf("Error\nMap is not enclosed by walls (top or bottom edge)\n");
                 return -1;
             }
             if (file_data[i][j] == '0' || file_data[i][j] == 'N' || file_data[i][j] == 'S' || file_data[i][j] == 'E' || file_data[i][j] == 'W')
@@ -81,10 +88,6 @@ int parse_our_map(t_game_data *game_data ,char **file_data, int i)
         j = 0;
         while (file_data[i][j])
         {
-            if(file_data[i][j] == ' ')
-            {
-                file_data[i][j] = '.';
-            }
             if (ft_strchr("SNWEPD", file_data[i][j]) &&  player_found == 0)
             {
                 game_data->row = i;
@@ -93,7 +96,7 @@ int parse_our_map(t_game_data *game_data ,char **file_data, int i)
                 file_data[i][j] = '0';  
                 player_found++;
             }
-            else if(!ft_strchr("01NSEW.\n", file_data[i][j]))
+            else if(!ft_strchr("01NSEW \n", file_data[i][j]))
             {
                 printf("Error: Invalid character in map.\n");
                 return -1;

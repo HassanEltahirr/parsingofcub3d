@@ -12,13 +12,13 @@ int	set_flag(int *flag, char *identifier)
 
 int	check_identifiers(char *line, int *flags)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0 && (line[2] == ' ' || line[2] == '\t'))
 		return (set_flag(&flags[0], "NO"));
-	else if (ft_strncmp(line, "SO", 2) == 0)
+	else if (ft_strncmp(line, "SO", 2) == 0 && (line[2] == ' ' || line[2] == '\t'))
 		return (set_flag(&flags[1], "SO"));
-	else if (ft_strncmp(line, "WE", 2) == 0)
+	else if (ft_strncmp(line, "WE", 2) == 0 && 		(line[2] == ' ' || line[2] == '\t'))
 		return (set_flag(&flags[2], "WE"));
-	else if (ft_strncmp(line, "EA", 2) == 0)
+	else if (ft_strncmp(line, "EA", 2) == 0 && (line[2] == ' ' || line[2] == '\t'))
 		return (set_flag(&flags[3], "EA"));
 	else if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
 		return (set_flag(&flags[4], "F"));
@@ -47,10 +47,15 @@ int	check_missing_identifiers(int *flags)
 
 int	validate_file_content(char **file_data)
 {
-	int		i;
+	int		i =0;
 	int		flags[6];
 	char	*trimmed_line;
 	char **split_line;
+	if(file_data[i] == NULL)
+	{
+		printf("Error: Empty file.\n");
+		return (-1);
+	}
 	split_line = ft_split(file_data[0], '\n');
 	i = 0;
 	ft_bzero(flags, sizeof(flags));

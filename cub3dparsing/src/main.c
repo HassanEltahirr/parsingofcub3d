@@ -6,21 +6,44 @@ char **read_file(const char *file_path);
 
 int is_texture_or_color_line(char *line)
 {
-    char *trimmed = ft_strtrim(line, " ");
-    int result = 0;
-
-    if (ft_strncmp(trimmed, "NO", 2) == 0 ||
-        ft_strncmp(trimmed, "SO", 2) == 0 ||
-        ft_strncmp(trimmed, "WE", 2) == 0 ||
-        ft_strncmp(trimmed, "EA", 2) == 0 ||
-        ft_strncmp(trimmed, "F", 1) == 0 ||
-        ft_strncmp(trimmed, "C", 1) == 0)
+    char *trimmed = ft_strtrim(line, " \t\r");
+    if (!trimmed)
     {
-        result = 1;
+        fprintf(stderr, "Error: Memory allocation failed during trimming.\n");
+        return 0;
+    }
+    if (ft_strncmp(trimmed, "NO ", 3) == 0 ||
+        ft_strncmp(trimmed, "SO ", 3) == 0 ||
+        ft_strncmp(trimmed, "WE ", 3) == 0 ||
+        ft_strncmp(trimmed, "EA ", 3) == 0 ||
+        ft_strncmp(trimmed, "S ", 2) == 0)
+    {
+        if(trimmed[2] != ' ')
+        {
+            printf("Error: Invalid character in texture line.\n");
+            free(trimmed);
+            return -1;
+        }
+        free(trimmed);
+        return 1;
+    }
+
+    // Check for color lines: "F " and "C "
+    if (ft_strncmp(trimmed, "F ", 2) == 0 ||
+        ft_strncmp(trimmed, "C ", 2) == 0)
+    {
+        if(trimmed[1] != ' ')
+        {
+            printf("Error: Invalid character in color line.\n");
+            free(trimmed);
+            return -1;
+        }
+        free(trimmed);
+        return 1;
     }
 
     free(trimmed);
-    return result;
+    return 0;
 }
 
 int find_map_start(char **file_data)
@@ -28,31 +51,35 @@ int find_map_start(char **file_data)
     int i = 0;
     while (file_data[i])
     {
-        if(file_data[i][0] == '\0')
-        {
-            return -1;
-
-        }
         char *trimmed = ft_strtrim(file_data[i], " \t\n\r");
-        if (trimmed[0] == '\n')
+        if (!trimmed)
         {
-            printf("Error: Blank line detected at line %d.\n", i + 1);
-            free(trimmed);
-            return -1;
+            write(3,"Error: Memory allocation failed during trimming.\n", 49);
         }
-        
+        if (trimmed[0] == '\0')
+        {
+            free(trimmed);
+            i++;
+            continue;
+        }
         if (is_texture_or_color_line(trimmed))
         {
             free(trimmed);
             i++;
             continue;
         }
+        if (is_texture_or_color_line(trimmed) == -1)
+        {
+            write(1,"Error: Invalid character in texture or color line.\n", 51);
+            free(trimmed);
+            return -1;
+        }
+
         if (ft_strchr(trimmed, '1') || ft_strchr(trimmed, '0'))
         {
             free(trimmed);
-            return i;  
+            return i;
         }
-        
         free(trimmed);
         i++;
     }
@@ -91,7 +118,9 @@ int parse_cub_file(const char *file_path)
 	init_game_data(&game_data);
     file_content = read_file(file_path);
     if(file_content == NULL)
+    {
         return printf("Error: The file wasn't found.\n"), -1;
+    }
     if(validate_file_content(file_content) == -1)
                 return free_file_content(file_content),-1;
     if(parse_textures_and_colors(&game_data, file_content) == -1)

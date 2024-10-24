@@ -107,7 +107,6 @@ int validatenumberofargs(char **split_color)
         while (split_color[i][j])
         {
             if (!ft_isdigit(split_color[i][j]))
-                // printf("%c", split_color[i][j]);
                 return 0;
             j++;
         }

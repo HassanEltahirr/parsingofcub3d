@@ -34,4 +34,6 @@ int get_map_height(char **file_data);
 int finalize_map(t_game_data *game_data,char **file_data);
 int validate_file_content(char **file_data);
 int find_map_start(char **file_data);
+void print_map(char **map);
+int ismapenclosedbywalls2(char **file_data);
 #endif
